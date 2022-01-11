@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="row" >
+        <div class="col-md-6 mb-4">
+            <div style="font-size: 18px;">
+                <h1>Project members</h1>
+                <ul>
+                    <li>Dimitris Poulimenos <a target="_blank" style="text-decoration: none" href="https://github.com/dpoulimen0s">GitHub</a></li>
+                    <li>William Joseph Brook Newbould <a target="_blank1" style="text-decoration: none" href="https://github.com/WillNewbo12">GitHub</a></li>
+                    <li>Jackson Thomas <a target="_blank2" style="text-decoration: none" href="https://github.com/jacky-ct">GitHub</a></li>
+                    <li>Will Adams <a target="_blank3" style="text-decoration: none" href="https://github.com/c0039921">GitHub</a></li>
+                    <li>Zhuolin Yong <a target="_blank4" style="text-decoration: none" href="https://github.com/b9067280">GitHub</a></li>
+                </ul>
+            </div>
+
+            <div style="font-size: 18px;">
+                <p style="margin-top: 80px;">You can send us an email: <a style="text-decoration: none;" href="mailto:carbontracer@gmail.com">carbontracer@gmail.com</a></p>
+            </div>
+
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="mapouter">
+                <div class="gmap_canvas">
+                    <iframe width="100%" height="300" id="gmap_canvas" src="https://maps.google.com/maps?q=Newcastle University&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                    <br>
+                    <style>.gmap_canvas {overflow:hidden;background:none!important;height:400px;width:100%;}</style>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <hr style="margin-top: -100px;">
+    <!-- Contact Form -->
+    <h3 class="mb-3 pb-2 pb-md-0 mb-md-5">Contact Us</h3>
+    <form>
+        <div class="row">
+            <div class="col-md-6 mb-3 ">
+                  <div class="form-floating mb-3">
+                      <input type="text" class="form-control" id="floatingInput" placeholder="firstname" required>
+                      <label for="floatingInput">First Name</label>
+                  </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="lastname" required>
+                    <label for="floatingInput">Last Name</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-4">
+                  <div class="form-floating mb-3">
+                      <input type="email" class="form-control" id="floatingInput" placeholder="email" required>
+                      <label for="floatingInput">Email</label>
+                  </div>
+            </div>
+            <div class="col-md-6 mb-4">
+                <div class="form-floating">
+                    <select class="form-select" id="floatingSelectGrid" aria-label="Floating label select example" required>
+                        <option value="1">Visitor</option>
+                        <option value="2">User</option>
+                    </select>
+                    <label for="floatingSelectGrid">Type</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-floating mb-3">
+                <textarea class="form-control" placeholder="message" id="floatingInput" style="height: 100px" required></textarea>
+                <label style="margin-left: 10px" for="floatingInput">Message</label>
+            </div>
+        </div>
+        <div class="mt-4 pt-2">
+            <input class="btn btn-primary btn-lg" type="submit" value="Submit" />
+        </div>
+    </form>
+{% endblock %}

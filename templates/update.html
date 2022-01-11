@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {{ form.csrf_token() }}
+    {{ form.title(class="input") }} {% for error in form.title.errors %} {{ error }} {% endfor %}
+    {{ form.body(class="textarea") }} {% for error in form.body.errors %} {{ error }} {% endfor %}
+    {{ form.submit(class="button is-info is-centered") }}
+
+{% endblock %}

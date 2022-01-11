@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" class="h-100">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.88.1">
+    <title>Carbon Tracer</title>
+    <link rel="shortcut icon" href="../static/img/logo.svg" />
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link href="/static/css/base.css" rel="stylesheet">
+
+    <!-- Kit for Icons-->
+    <script src="https://kit.fontawesome.com/45463fbacb.js" crossorigin="anonymous"></script>
+    <script type='text/javascript' src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <!-- Javascript Scripts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" src="../static/js/geochart.js"></script>
+    <script type="text/javascript" src="../static/js/linechart.js"></script>
+
+
+  </head>
+
+  <body class="d-flex flex-column min-vh-100">
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+
+        <!-- Navigation Bar -->
+        <div class="container py-2">
+
+            <div class="d-flex flex-column flex-md-row align-items-center pb-2 mb-1 border-bottom mr-auto">
+
+                <!-- Logo and Text -->
+                <a href="/" id="title" class="d-flex align-items-center text-dark text-decoration-none">
+	                <img src="/static/img/logo.svg" alt="Carbon Tracer logo" height="40px"/>
+                    <span style="text-decoration: none; font-family: Helvetica Now Display, sans-serif; font-weight: Bold; color: #37323e" class="fs-1"> &nbspCarbon Tracer</span>
+                </a>
+
+                <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+
+                    <!-- Content for logged in users -->
+                    {% if current_user.role == 'user' %}
+
+                        <a class="me-3 py-2 nav-link" href="{{ url_for('index') }}" id="navlink">Home</a>
+                        <a class="me-3 py-2 nav-link" href="{{ url_for('users.panel') }}" id="navlink">My Panel</a>
+                        <a class="me-3 py-2 nav-link" href="{{ url_for('calculator.calculator') }}" id="navlink">Calculator</a>
+                        <a class="me-3 py-2 nav-link" href="{{ url_for('test.test') }}" id="navlink">Test</a>
+                        <a class="me-3 py-2 nav-link" href="{{ url_for('admin.contact') }}" id="navlink">Contact</a>
+                    {% endif %}
+
+                    {% if  current_user.role == 'admin' %}
+
+                        <a class="me-3 py-2 nav-link" href="{{ url_for('admin.admin') }}" id="navlink">Admin's Panel</a>
+
+                    {% endif %}
+
+                    <!-- General content of the authenticated users -->
+                    {% if current_user.is_authenticated %}
+
+                        <div class="dropdown dropdown-menu-end">
+                            <a type="button" class="btn dropdown-toggle" data-bs-toggle="dropdown">
+                                <img src="../static/img/users/{{ current_user.username }}.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+                                <strong>{{ current_user.firstname }}</strong>
+                            </a>
+                            <ul class="dropdown-menu mx-0 shadow" style="width: 220px;">
+
+                                <li>
+                                    <a class="dropdown-item d-flex gap-2 align-items-center" href="{{ url_for('users.profile') }}">
+                                        <i class="fas fa-user"></i> Profile
+                                    </a>
+                                </li>
+                                {% if current_user.role == 'admin' %}
+                                    <li><hr class="dropdown-divider"></li>
+
+                                    <li>
+                                        <a class="dropdown-item d-flex gap-2 align-items-center" href="{{ url_for('calculator.calculator') }}">
+                                            <i class="fas fa-calculator"></i> Calculator
+                                        </a>
+                                    </li>
+
+                                    <li>
+                                        <a class="dropdown-item d-flex gap-2 align-items-center" href="{{ url_for('test.test') }}">
+                                            <i class="fas fa-question"></i> Test
+                                        </a>
+                                    </li>
+
+
+                                {% endif %}
+                                <li><hr class="dropdown-divider"></li>
+
+                                <li>
+                                    <a class="dropdown-item dropdown-item-danger d-flex gap-2 align-items-center" href="{{ url_for('users.logout') }}">
+                                        <i class="fas fa-sign-out-alt"></i> Sign Out
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                    {% endif %}
+
+                    <!-- What visitors can see on the website -->
+                    {% if not current_user.is_authenticated %}
+
+                        <a class="me-3 py-2 nav-link" href="{{ url_for('index') }}" id="navlink">Home</a>
+                        <a class="me-3 py-2 nav-link" href="{{ url_for('calculator.calculator') }}" id="navlink">Calculator</a>
+                        <a class="me-3 py-2 nav-link" href="{{ url_for('test.test') }}" id="navlink">Test</a>
+                        <a class="me-3 py-2 nav-link" href="{{ url_for('admin.contact') }}" id="navlink">Contact</a>
+                        <a style="margin-left: 10px" class="btn btn-primary" href="{{ url_for('users.register') }}" role="button">Sign Up</a>
+                        <a style="margin-left: 10px" class="btn btn-success" href="{{ url_for('users.login') }}" role="button">Log In</a>
+
+                    {% endif %}
+
+                </nav>
+
+            </div>
+
+        </div>
+
+        <!-- Here is where all the content from the extended pages -->  <!-- -->
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                {% block content %}
+
+                {% endblock %}
+            </div>
+        </div>
+
+    </main>
+
+    <footer id="footer" style="margin-bottom: 0" class="footer mt-auto py-3 bg-transparent ">
+      <div class="container text-center ">
+        <div class="container border-top"></div>
+        <span class="text-muted ">© 2021-2022 Carbon Tracer</span>
+      </div>
+    </footer>
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+  </body>
+</html>
